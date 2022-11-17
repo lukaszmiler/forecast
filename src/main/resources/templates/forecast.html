@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forecast</title>
+</head>
+<body>
+<style>
+    table, th, td {
+        border: 1px solid;
+        margin: 2px;
+        padding: 10px;
+    }
+</style>
+
+<h1 th:text="${forecast.getRegion()}"></h1>
+</br>
+
+<h3>Today</h3>
+<table>
+    <tr>
+        <td>curTemperature</td>
+        <td th:text="${forecast.getCurrentConditions().getTemp().getC()}"></td>
+    </tr>
+    <tr>
+        <td>curPrecip</td>
+        <td th:text="${forecast.getCurrentConditions().getPrecip()}"></td>
+    </tr>
+    <tr>
+        <td>curHumidity</td>
+        <td th:text="${forecast.getCurrentConditions().getHumidity()}"></td>
+    </tr>
+    <tr>
+        <td>curWind</td>
+        <td th:text="${forecast.getCurrentConditions().getWind().getKm()}"></td>
+    </tr>
+    <tr>
+        <td>curIcon</td>
+        <td><img th:src="${forecast.getCurrentConditions().getIconURL()}" /></td>
+    </tr>
+</table>
+
+
+<div th:each="day: ${forecast.getNextDays()}">
+    <br/>
+
+<h3 th:text="${day.getDay()}"></h3>
+<table>
+    <tr>
+        <td>comment</td>
+        <td th:text="${day.getComment()}"></td>
+    </tr>
+    <tr>
+        <td>max_temp</td>
+        <td th:text="${day.getMaxTemp().getC()}"></td>
+    </tr>
+    <tr>
+        <td>min_temp</td>
+        <td th:text="${day.getMinTemp().getC()}"></td>
+    </tr>
+    <tr>
+        <td>Icon</td>
+        <td><img th:src="${day.getIconURL()}" /></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
